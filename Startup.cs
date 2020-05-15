@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using examen.Models;
+using System.Text.Json;
 using Examen;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 
 namespace examen
 {
@@ -30,7 +32,7 @@ namespace examen
         {   services.Configure<AerolineaDataSettings>(Configuration.GetSection(nameof(AerolineaDataSettings)));
             services.AddSingleton<IAerolineaDataSettings>(sp => sp.GetRequiredService<IOptions<AerolineaDataSettings>>().Value);
             services.AddSingleton<AerolineaService>();
-            
+
             services.AddControllers();
         }
 

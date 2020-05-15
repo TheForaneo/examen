@@ -19,14 +19,16 @@ namespace examen.Controllers{
         public AerolineaController(AerolineaService aerolineaService){
            _aerolineaService=aerolineaService;
         }
-
+        
+        //api/aerolinea
         [HttpGet]
         public ActionResult<List<Aerolinea>> LeerTodos(){
-            return _aerolineaService.Get();  
+            return _aerolineaService.Get();
+
         }
 
-        [HttpGet("{Isd}", Name="Get")]
-        [Route("action")]
+        //api/aerolinea/id
+        [HttpGet("{Id}", Name="Get")]
         public ActionResult<Aerolinea> LeerPorId(int id){  
             var aerolinea= _aerolineaService.GetId(id);
             if(aerolinea != null){
@@ -35,11 +37,14 @@ namespace examen.Controllers{
             return NotFound();
         }
 
+        //api/aerolinea
         [HttpPost]
         public ActionResult<Aerolinea> Crear(Aerolinea aero){
             _aerolineaService.Create(aero);
             return Ok();
         }
+
+        //api/aerolinea/id
         [HttpPut("{id}")]
         public ActionResult Actualizar(int id, Aerolinea update)
         {   
@@ -52,11 +57,12 @@ namespace examen.Controllers{
             return NotFound();
         }
 
+        //api/aerolinea/id
         [HttpDelete("{id}")]
         public IActionResult Borrar(int Id){
             var aerolinea = _aerolineaService.GetId(Id);
             if(aerolinea!=null){
-                _aerolineaService.Remove(aerolinea.Isd);
+                _aerolineaService.Remove(aerolinea.IDAerolinea);
                 return Ok();
             }
             return NotFound();
